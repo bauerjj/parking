@@ -92,7 +92,7 @@ hr.star-primary:after {
 
 header {
     text-align: center;
-    background-image: url('/img/az2.png');
+    background-image: url('http://spotcheckaz.com/img/az2.png ');
     background-size: cover;
     color: white
 } 
