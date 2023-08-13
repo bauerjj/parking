@@ -92,7 +92,7 @@ hr.star-primary:after {
 
 header {
     text-align: center;
-    background-image: url('{{ site.baseurl }}/img/az2.png');
+    background-image: url('/img/az2.png');
     background-size: cover;
     color: white
 } 
