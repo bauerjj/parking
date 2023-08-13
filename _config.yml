@@ -1,0 +1,65 @@
+# Site settings
+title: spotcheckaz
+email: contact@spotcheckaz.com
+url: http://spotcheckaz.com
+description: "Parking enforcement for the Phoenix Arizona area. Ideal for HOAs communities."
+keywords: "parking enforcement arizona HOA condo tickets towing"
+skills: "Modern and efficent parking enforcement for communities in the Phoenix area"
+meta_author: LastName FirstName
+
+# Google webmaster tools
+google_verify:
+
+# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
+bing_verify:
+
+# Contact form:
+# - static : pass through formspree.io to validate email sending
+# - disqus : replace contact form by disqus thread
+# - comment the line below if you want to stick with the default PHP contact form
+contact: static
+
+# If you use disqus you need disqus shortname
+# https://help.disqus.com/customer/portal/articles/466208
+disqus_shortname: myshortname
+
+# Color settings (hex-codes without the leading hash-tag)
+color:
+  primary: 241321 #80B3FF
+  primary-rgb: "24,288,156" #"128,179,255"
+  secondary: 241321 #FD6E8A
+  secondary-dark: 241321 #A2122F
+
+# Footer settings
+footer:
+  copyright: SpotchCheckAz LLC
+  location: Location
+  social: Around the Web
+  credits: Parking Enforcement
+
+# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
+social:
+  - title: twitter
+    url: http://twitter.com/spotcheckaz
+  - title: instagram
+    url: http://instagram.com/spotcheckaz
+
+# Postal address (add as many lines as necessary)
+address:
+  - line: 10105 E Vía Linda #103, 
+  - line: Scottsdale, AZ 85258
+
+# Credits content
+credits: 'Efficient and simple parking enforcement for your community'
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+#for posts
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      permalink: ""

@@ -1,0 +1,85 @@
+<!-- Portfolio Grid Section -->
+<!-- <section id="portfolio">
+  <div class="container portfolio-flex-grid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>Why Choose Us</h2>
+        <hr class="star-primary">
+      </div>
+    </div>
+    <div class="portfolio-flex-row">
+      {% for post in site.posts %}
+      <div class="portfolio-flex-item portfolio-item">
+        <a href="#portfolioModal-{{ post.modal-id }}" class="portfolio-link" data-toggle="modal">
+          <div class="caption">
+            <div class="caption-content">
+              <i class="fa fa-search-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="img/portfolio/{{ post.img }}" class="img-responsive" alt="{{ post.alt }}">
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section> -->
+
+
+
+
+<!-- Portfolio Grid Section -->
+<section id="portfolio" class="features">
+  <div class="container">
+  <div class="row">
+    <div class="col-lg-5 order-2 order-lg-1 features-item" data-aos="fade-up" data-aos-delay="200">
+      <h3>Powerful, Easy to Use Analytics</h3>
+      <p>We leverage technology to make it easy to enforce your parking rules.</p>
+      <ul>
+        <li><i class="bi bi-check"></i> Search plates by time on site, vehicle type, color, make, etc</li>
+        <li><i class="bi bi-check"></i><span>Understand who is entering your community and how long they stay</span></li>
+        <li><i class="bi bi-check"></i> <span>Get notified when a certain vehile arrives or has exceeded their parking time</span>.</li>
+      </ul>
+    </div>
+    <div class="col-lg-7 order-1 order-lg-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
+      <div class="image-stack">
+        <img src="img/portfolio/alpr.jpg" alt="" class="stack-front img-responsive">
+      </div>
+    </div>
+  </div><!-- Features Item -->
+
+
+  <div class="row gy-4 align-items-stretch justify-content-between features-item ">
+    <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
+      <img src="img/portfolio/alpr2.jpg" class="img-fluid" alt="">
+    </div>
+    <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
+      <h3>Automatic License Plate Readers</h3>
+      <p>Hand-held or car-mounted license plate readers allow for an accurate method to track vistors who overstay their visit</p>
+      <ul>
+        <li><i class="bi bi-check"></i> Requires a list of license plates from existing tenants</li>
+      </ul>
+    </div>
+  </div><!-- Features Item -->
+
+  <div class="row">
+    <div class="col-lg-5 order-2 order-lg-1 features-item" data-aos="fade-up" data-aos-delay="200">
+      <h3>We work with Towing companies</h3>
+      <p>
+        We partner with your existing towing company or we can recommend one. Anytime a vistor is over-extending their stay 
+        we will have them removed or place warning stickers on the vehicle. Let us handle the workflow for you. 
+     </p>
+     <ul>
+      <li><i class="bi bi-check"></i> Manually scan license plates</li>
+      <li><i class="bi bi-check"></i><span> Digitally chalk vehicles in your community to ensure no one overextends their stay.</span></li>
+    </ul>
+    </div>
+    <div class="col-lg-7 order-1 order-lg-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
+      <div class="image-stack">
+        <img src="img/portfolio/tow2.png" alt="" class="stack-front img-responsive">
+      </div>
+    </div>
+  </div><!-- Features Item -->
+
+
+</div>
+</section>

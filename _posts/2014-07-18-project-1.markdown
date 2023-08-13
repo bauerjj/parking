@@ -1,0 +1,13 @@
+---
+layout: default
+title: Powerful, Easy to Use Analytics
+modal-id: 1
+date: 2014-07-18
+img: analytics2.png
+img2: alpr.jpg
+alt: image-alt
+project-date:
+client:
+category:
+description: Search plates by time on site, vehicle type, color, make, etc. Understand who is entering your community and how long they stay. Get notified when a certain vehile arrives or has exceeded their parking time.
+---

@@ -1,0 +1,12 @@
+---
+layout: default
+title: Automatic License Plate Readers
+modal-id: 2
+date: 2014-07-17
+img: alpr3.png
+alt: image-alt
+project-date: 
+client: 
+category:
+description:  
+---
