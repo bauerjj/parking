@@ -6,6 +6,8 @@ description: "Parking enforcement for the Phoenix Arizona area. Ideal for HOAs c
 keywords: "parking enforcement arizona HOA condo tickets towing"
 skills: "Modern and efficent parking enforcement for communities in the Phoenix area"
 meta_author: Bauer Justin
+plugins:
+  - jekyll-sitemap
 
 # Google webmaster tools
 google_verify:
