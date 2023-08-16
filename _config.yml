@@ -46,7 +46,7 @@ social:
 
 # Postal address (add as many lines as necessary)
 address:
-  - line: 10105 E Vía Linda #103, 
+  - line: "10105 E Vía Linda #103" 
   - line: Scottsdale, AZ 85258
 
 # Credits content
