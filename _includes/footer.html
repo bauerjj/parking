@@ -1,48 +1,68 @@
 <!-- Footer -->
-<footer class="text-center">
-  <div class="footer-above">
-    <div class="container">
-      <div class="row">
-        <div class="footer-col col-md-4">
-          <h3>{{ site.footer.location }}</h3>
-          <p>
-            {% for adress in site.address %}
-            {{ adress.line }} <br>
-            {% endfor %}
-          </p>
+<footer class="site-footer">
+  <div class="container">
+    <div class="row gy-4">
+      <!-- Company Info -->
+      <div class="col-lg-4 col-md-6">
+        <div class="footer-brand">
+          <img src="/img/logo-icon.png" alt="Desert Standards" class="footer-logo-icon">
+          <div class="footer-brand-text">
+            <span class="footer-name-top">DESERT</span>
+            <span class="footer-name-bottom">STANDARDS</span>
+            <span class="footer-tagline">COMMUNITY COMPLIANCE</span>
+          </div>
         </div>
-        <div class="footer-col col-md-4">
-          <h3>{{ site.footer.social }}</h3>
-          <ul class="list-inline">
-            {% for network in site.social %}
-            <li>
-              <a href="{{ network.url }}" class="btn-social btn-outline"><i
-                  class="fa-brands fa-fw fa-{{ network.title }}"></i></a>
-            </li>
+        <p class="footer-text mb-3">Professional parking enforcement and CC&R compliance patrol for HOA communities and commercial properties in Phoenix, Arizona.</p>
+        <p class="footer-text small"><i class="fas fa-certificate me-1"></i> {{ site.footer.license }}</p>
+        <p class="footer-text small">All patrol officers licensed through AZ DPS</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-lg-2 col-md-6">
+        <h6 class="text-uppercase fw-bold mb-3">Quick Links</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#technology">Technology</a></li>
+          <li><a href="#ccr">CC&R Compliance</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-lg-3 col-md-6">
+        <h6 class="text-uppercase fw-bold mb-3">Contact</h6>
+        <ul class="list-unstyled footer-links">
+          <li><i class="fas fa-phone me-2"></i>{{ site.footer.phone }}</li>
+          <li><i class="fas fa-envelope me-2"></i><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          <li><i class="fas fa-map-marker-alt me-2"></i>
+            {% for addr in site.address %}
+              {{ addr.line }}
             {% endfor %}
-          </ul>
-        </div>
-        <div class="footer-col col-md-4">
-          <h3>{{ site.footer.credits }}</h3>
-          <p>{{ site.credits }}</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social -->
+      <div class="col-lg-3 col-md-6">
+        <h6 class="text-uppercase fw-bold mb-3">Follow Us</h6>
+        <div class="social-icons">
+          {% for network in site.social %}
+          <a href="{{ network.url }}" class="social-icon" aria-label="{{ network.title }}">
+            <i class="fa-brands fa-{{ network.title }}"></i>
+          </a>
+          {% endfor %}
         </div>
       </div>
     </div>
-  </div>
-  <div class="footer-below">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          Copyright &copy; {{ site.footer.copyright }} 20{{ site.time | date: '%y' }}
-        </div>
+
+    <hr class="mt-4 mb-3 border-secondary">
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p class="text-muted small mb-0">
+          &copy; {{ site.time | date: '%Y' }} {{ site.footer.copyright }}. All rights reserved.
+        </p>
       </div>
     </div>
   </div>
 </footer>
-
-<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-<div class="scroll-top page-scroll visible-xs visible-sm">
-  <a class="btn btn-primary" href="#page-top">
-    <i class="fa fa-chevron-up"></i>
-  </a>
-</div>

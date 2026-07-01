@@ -1,3 +1,4 @@
 source "https://rubygems.org"
-gemspec
-gem 'jekyll-sitemap'
+gem "jekyll", "~> 4.0"
+gem "jekyll-sitemap"
+gem "webrick"

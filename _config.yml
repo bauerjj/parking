@@ -1,65 +1,32 @@
-# Site settings
-title: spotcheckaz
-email: bsms0+formspree@pm.me
-url: http://spotcheckaz.com
-description: "Parking enforcement for the Phoenix Arizona area. Ideal for HOAs communities."
-keywords: "parking enforcement arizona HOA condo tickets towing"
-skills: "Modern and efficent parking enforcement for communities in the Phoenix area"
-meta_author: Bauer Justin
+title: Desert Standards
+email: info@desertstandards.com
+url: "https://desertstandards.com"
+description: "Professional parking enforcement, CC&R compliance patrol, and security camera installation for HOA communities and commercial properties in Phoenix, Arizona."
+keywords: "parking enforcement arizona HOA condo CC&R compliance patrol cameras Phoenix Scottsdale"
+baseurl: ""
 plugins:
   - jekyll-sitemap
 
-# Google webmaster tools
-google_verify:
-
-# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
-bing_verify:
-
-# Contact form:
-# - static : pass through formspree.io to validate email sending
-# - disqus : replace contact form by disqus thread
-# - comment the line below if you want to stick with the default PHP contact form
 contact: static
 
-# If you use disqus you need disqus shortname
-# https://help.disqus.com/customer/portal/articles/466208
-disqus_shortname: myshortname
-
-# Color settings (hex-codes without the leading hash-tag)
 color:
-  primary: 241321 #80B3FF
-  primary-rgb: "24,288,156" #"128,179,255"
-  secondary: 241321 #FD6E8A
-  secondary-dark: 241321 #A2122F
+  primary: "3D2B1F"
+  accent: "D4842A"
+  accent-green: "4A6B35"
 
-# Footer settings
 footer:
-  copyright: SpotchCheckAz LLC
-  location: Location
-  social: Around the Web
-  credits: Parking Enforcement
+  copyright: Desert Standards LLC
+  phone: "(602) 555-0199"
+  license: "AZ DPS Licensed"
 
-# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
 social:
-  - title: twitter
-    url: http://twitter.com/spotcheckaz
+  - title: facebook
+    url: "#"
+  - title: instagram
+    url: "#"
 
-# Postal address (add as many lines as necessary)
 address:
-  - line: "10105 E Vía Linda #103" 
-  - line: Scottsdale, AZ 85258
+  - line: "Phoenix, AZ Metro Area"
 
-# Credits content
-credits: 'Efficient and simple parking enforcement for your community'
-
-# Build settings
 markdown: kramdown
 permalink: pretty
-
-#for posts
-defaults:
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      permalink: ""

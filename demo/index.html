@@ -1,0 +1,554 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desert Standards — Dashboard Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <link rel="stylesheet" href="/css/demo.css">
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <img src="/img/logo-icon.png" alt="Desert Standards" class="sidebar-logo">
+    <div class="sidebar-brand-text">
+      <span class="sb-name">DESERT</span>
+      <span class="sb-sub">STANDARDS</span>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#" class="sidebar-link active" data-page="dashboard">
+      <i class="fas fa-th-large"></i><span>Dashboard</span>
+    </a>
+    <a href="#" class="sidebar-link" data-page="patrols">
+      <i class="fas fa-route"></i><span>Patrol Routes</span>
+    </a>
+    <a href="#" class="sidebar-link" data-page="citations">
+      <i class="fas fa-file-alt"></i><span>Citations</span>
+    </a>
+    <a href="#" class="sidebar-link" data-page="properties">
+      <i class="fas fa-building"></i><span>Properties</span>
+    </a>
+    <a href="#" class="sidebar-link" data-page="reports">
+      <i class="fas fa-chart-bar"></i><span>Reports</span>
+    </a>
+    <a href="#" class="sidebar-link" data-page="cameras">
+      <i class="fas fa-video"></i><span>Body Cameras</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-avatar">JM</div>
+      <div class="user-info">
+        <span class="user-name">Jane Mitchell</span>
+        <span class="user-role">Board Admin</span>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <button class="sidebar-toggle d-lg-none" id="sidebarToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="topbar-search">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search citations, properties, officers..." id="globalSearch">
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-date">
+        <i class="fas fa-calendar-alt me-1"></i>
+        <span id="dateRange">Jun 1 – Jun 30, 2026</span>
+      </div>
+      <div class="topbar-notifications" id="notifBell">
+        <i class="fas fa-bell"></i>
+        <span class="notif-badge">3</span>
+      </div>
+      <a href="/" class="btn btn-sm btn-back-site">
+        <i class="fas fa-arrow-left me-1"></i>Back to Site
+      </a>
+    </div>
+  </header>
+
+  <!-- ========== DASHBOARD PAGE ========== -->
+  <div class="page-content" id="page-dashboard">
+
+    <div class="page-header">
+      <h1 class="page-title">Dashboard Overview</h1>
+      <p class="page-subtitle">Desert Ridge HOA — Monthly Summary</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+          <div class="stat-accent" style="background: #4A6B35;"></div>
+          <div class="stat-icon" style="background: rgba(74,107,53,0.1); color: #4A6B35;">
+            <i class="fas fa-shield-halved"></i>
+          </div>
+          <div class="stat-body">
+            <span class="stat-label">Total Patrols</span>
+            <span class="stat-value">148</span>
+            <span class="stat-change positive"><i class="fas fa-arrow-up"></i> 12% vs last month</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+          <div class="stat-accent" style="background: #D4842A;"></div>
+          <div class="stat-icon" style="background: rgba(212,132,42,0.1); color: #D4842A;">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <div class="stat-body">
+            <span class="stat-label">Citations Issued</span>
+            <span class="stat-value">312</span>
+            <span class="stat-change positive"><i class="fas fa-arrow-up"></i> 8% vs last month</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+          <div class="stat-accent" style="background: #4A6B35;"></div>
+          <div class="stat-icon" style="background: rgba(74,107,53,0.1); color: #4A6B35;">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="stat-body">
+            <span class="stat-label">Compliance Rate</span>
+            <span class="stat-value">91%</span>
+            <span class="stat-change positive"><i class="fas fa-arrow-up"></i> 4% vs last month</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+          <div class="stat-accent" style="background: #D4842A;"></div>
+          <div class="stat-icon" style="background: rgba(212,132,42,0.1); color: #D4842A;">
+            <i class="fas fa-building"></i>
+          </div>
+          <div class="stat-body">
+            <span class="stat-label">Active Properties</span>
+            <span class="stat-value">14</span>
+            <span class="stat-change neutral">communities</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <!-- Citations Table -->
+      <div class="col-xl-8">
+        <div class="card dash-card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">Recent Citations</h5>
+            <div class="d-flex align-items-center gap-2">
+              <div class="filter-pills">
+                <button class="pill active" data-filter="all">All</button>
+                <button class="pill" data-filter="parking">Parking</button>
+                <button class="pill" data-filter="ccr">CC&R</button>
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                  <i class="fas fa-download me-1"></i>Export
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-file-excel me-2"></i>Export to Excel</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf me-2"></i>Export to PDF</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0" id="citationsTable">
+                <thead>
+                  <tr>
+                    <th class="sortable" data-sort="date">Date <i class="fas fa-sort"></i></th>
+                    <th class="sortable" data-sort="property">Property <i class="fas fa-sort"></i></th>
+                    <th>Violation</th>
+                    <th>Lot/Unit</th>
+                    <th>Status</th>
+                    <th>Officer</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="citationsBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-xl-4">
+        <!-- Violations Chart -->
+        <div class="card dash-card mb-3">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Violations by Type</h5>
+          </div>
+          <div class="card-body">
+            <div class="bar-chart" id="violationChart"></div>
+          </div>
+        </div>
+
+        <!-- Today's Schedule -->
+        <div class="card dash-card">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Today's Patrol Schedule</h5>
+          </div>
+          <div class="card-body">
+            <div class="schedule-timeline" id="scheduleTimeline"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PATROL ROUTES PAGE ========== -->
+  <div class="page-content d-none" id="page-patrols">
+    <div class="page-header">
+      <h1 class="page-title">Patrol Routes</h1>
+      <p class="page-subtitle">GPS-verified patrol tracking</p>
+    </div>
+    <div class="row g-3">
+      <div class="col-lg-8">
+        <div class="card dash-card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">Live Patrol Map</h5>
+            <div class="d-flex gap-2">
+              <select class="form-select form-select-sm" style="width:auto;" id="patrolOfficerSelect">
+                <option>All Officers</option>
+                <option>M. Torres</option>
+                <option>R. Davis</option>
+                <option>K. Patel</option>
+              </select>
+              <select class="form-select form-select-sm" style="width:auto;">
+                <option>Today</option>
+                <option>Yesterday</option>
+                <option>Last 7 Days</option>
+              </select>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div id="patrolMap" style="height: 500px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card dash-card mb-3">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Patrol Summary</h5>
+          </div>
+          <div class="card-body">
+            <div class="patrol-stat-row">
+              <span class="patrol-stat-label">Distance Covered</span>
+              <span class="patrol-stat-value">14.2 mi</span>
+            </div>
+            <div class="patrol-stat-row">
+              <span class="patrol-stat-label">Duration</span>
+              <span class="patrol-stat-value">3h 24m</span>
+            </div>
+            <div class="patrol-stat-row">
+              <span class="patrol-stat-label">Stops Made</span>
+              <span class="patrol-stat-value">18</span>
+            </div>
+            <div class="patrol-stat-row">
+              <span class="patrol-stat-label">Citations Issued</span>
+              <span class="patrol-stat-value">7</span>
+            </div>
+            <div class="patrol-stat-row">
+              <span class="patrol-stat-label">Warnings Given</span>
+              <span class="patrol-stat-value">4</span>
+            </div>
+          </div>
+        </div>
+        <div class="card dash-card">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Active Officers</h5>
+          </div>
+          <div class="card-body">
+            <div class="officer-row">
+              <div class="officer-avatar" style="background:#4A6B35;">MT</div>
+              <div class="officer-info">
+                <span class="officer-name">M. Torres</span>
+                <span class="officer-status active"><i class="fas fa-circle"></i> On Patrol — Desert Ridge</span>
+              </div>
+            </div>
+            <div class="officer-row">
+              <div class="officer-avatar" style="background:#D4842A;">RD</div>
+              <div class="officer-info">
+                <span class="officer-name">R. Davis</span>
+                <span class="officer-status active"><i class="fas fa-circle"></i> On Patrol — Pinnacle Condos</span>
+              </div>
+            </div>
+            <div class="officer-row">
+              <div class="officer-avatar" style="background:#7A6B5D;">KP</div>
+              <div class="officer-info">
+                <span class="officer-name">K. Patel</span>
+                <span class="officer-status"><i class="fas fa-circle"></i> Scheduled 8:30 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CITATIONS PAGE ========== -->
+  <div class="page-content d-none" id="page-citations">
+    <div class="page-header d-flex justify-content-between align-items-start">
+      <div>
+        <h1 class="page-title">Citations</h1>
+        <p class="page-subtitle">Full citation history and management</p>
+      </div>
+      <button class="btn btn-accent" id="btnAddCitation">
+        <i class="fas fa-plus me-1"></i>Add Citation
+      </button>
+    </div>
+    <div class="card dash-card">
+      <div class="card-header">
+        <div class="row g-2 align-items-center">
+          <div class="col-md-4">
+            <div class="input-group input-group-sm">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+              <input type="text" class="form-control" placeholder="Search citations..." id="citationSearch">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <select class="form-select form-select-sm" id="filterProperty">
+              <option value="">All Properties</option>
+              <option>Desert Ridge HOA</option>
+              <option>Pinnacle Condos</option>
+              <option>Scottsdale Villas</option>
+              <option>Arcadia Estates</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <select class="form-select form-select-sm" id="filterStatus">
+              <option value="">All Statuses</option>
+              <option>Cited</option>
+              <option>Warning</option>
+              <option>Resolved</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <select class="form-select form-select-sm" id="filterType">
+              <option value="">All Types</option>
+              <option value="parking">Parking</option>
+              <option value="ccr">CC&R</option>
+            </select>
+          </div>
+          <div class="col-md-2 text-end">
+            <span class="text-muted small" id="resultCount">Showing 24 results</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0" id="fullCitationsTable">
+            <thead>
+              <tr>
+                <th>Citation #</th>
+                <th>Date</th>
+                <th>Property</th>
+                <th>Violation</th>
+                <th>Lot/Unit</th>
+                <th>Vehicle</th>
+                <th>Status</th>
+                <th>Repeat</th>
+                <th>Officer</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="fullCitationsBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center">
+        <span class="text-muted small">Showing 1-10 of 24</span>
+        <nav>
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PROPERTIES PAGE ========== -->
+  <div class="page-content d-none" id="page-properties">
+    <div class="page-header">
+      <h1 class="page-title">Properties</h1>
+      <p class="page-subtitle">Managed communities and properties</p>
+    </div>
+    <div class="row g-3" id="propertiesGrid"></div>
+  </div>
+
+  <!-- ========== REPORTS PAGE ========== -->
+  <div class="page-content d-none" id="page-reports">
+    <div class="page-header">
+      <h1 class="page-title">Reports</h1>
+      <p class="page-subtitle">Generate and export compliance reports</p>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card dash-card report-card" data-report="monthly">
+          <div class="card-body text-center py-4">
+            <div class="report-icon"><i class="fas fa-calendar-alt"></i></div>
+            <h5>Monthly Summary</h5>
+            <p class="text-muted small">Patrol activity, citations, and compliance trends</p>
+            <button class="btn btn-sm btn-accent">Generate Report</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dash-card report-card">
+          <div class="card-body text-center py-4">
+            <div class="report-icon"><i class="fas fa-user-slash"></i></div>
+            <h5>Repeat Offenders</h5>
+            <p class="text-muted small">Addresses with multiple violations for escalation</p>
+            <button class="btn btn-sm btn-accent">Generate Report</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dash-card report-card">
+          <div class="card-body text-center py-4">
+            <div class="report-icon"><i class="fas fa-map-marked-alt"></i></div>
+            <h5>Patrol Coverage</h5>
+            <p class="text-muted small">GPS route logs and coverage verification</p>
+            <button class="btn btn-sm btn-accent">Generate Report</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dash-card report-card">
+          <div class="card-body text-center py-4">
+            <div class="report-icon"><i class="fas fa-car"></i></div>
+            <h5>Parking Violations</h5>
+            <p class="text-muted small">All parking-related citations by property</p>
+            <button class="btn btn-sm btn-accent">Generate Report</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dash-card report-card">
+          <div class="card-body text-center py-4">
+            <div class="report-icon"><i class="fas fa-clipboard-check"></i></div>
+            <h5>CC&R Compliance</h5>
+            <p class="text-muted small">Community rule violations and resolution status</p>
+            <button class="btn btn-sm btn-accent">Generate Report</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dash-card report-card">
+          <div class="card-body text-center py-4">
+            <div class="report-icon"><i class="fas fa-video"></i></div>
+            <h5>Body Camera Log</h5>
+            <p class="text-muted small">Axon body camera footage index and access log</p>
+            <button class="btn btn-sm btn-accent">Generate Report</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== BODY CAMERAS PAGE ========== -->
+  <div class="page-content d-none" id="page-cameras">
+    <div class="page-header">
+      <h1 class="page-title">Body Camera Footage</h1>
+      <p class="page-subtitle">Axon body camera recordings indexed by patrol</p>
+    </div>
+    <div class="row g-3" id="cameraGrid"></div>
+  </div>
+
+</main>
+
+<!-- Citation Detail Modal -->
+<div class="modal fade" id="citationModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Citation Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="citationModalBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-print me-1"></i>Print</button>
+        <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-file-pdf me-1"></i>Export PDF</button>
+        <button class="btn btn-sm btn-accent" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notification Panel -->
+<div class="offcanvas offcanvas-end" id="notifPanel">
+  <div class="offcanvas-header">
+    <h5>Notifications</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="notif-item unread">
+      <div class="notif-icon" style="background:rgba(180,60,45,0.1);color:#B43C2D;"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="notif-content">
+        <p class="notif-text"><strong>Repeat offender flagged</strong> — Lot 42, Desert Ridge HOA (4th violation this month)</p>
+        <span class="notif-time">12 minutes ago</span>
+      </div>
+    </div>
+    <div class="notif-item unread">
+      <div class="notif-icon" style="background:rgba(74,107,53,0.1);color:#4A6B35;"><i class="fas fa-check-circle"></i></div>
+      <div class="notif-content">
+        <p class="notif-text"><strong>Patrol completed</strong> — M. Torres finished Desert Ridge HOA route</p>
+        <span class="notif-time">38 minutes ago</span>
+      </div>
+    </div>
+    <div class="notif-item unread">
+      <div class="notif-icon" style="background:rgba(212,132,42,0.1);color:#D4842A;"><i class="fas fa-file-alt"></i></div>
+      <div class="notif-content">
+        <p class="notif-text"><strong>Monthly report ready</strong> — June 2026 summary available for download</p>
+        <span class="notif-time">2 hours ago</span>
+      </div>
+    </div>
+    <div class="notif-item">
+      <div class="notif-icon" style="background:rgba(122,107,93,0.1);color:#7A6B5D;"><i class="fas fa-video"></i></div>
+      <div class="notif-content">
+        <p class="notif-text"><strong>Body cam uploaded</strong> — R. Davis patrol footage (Jun 29) processed</p>
+        <span class="notif-time">Yesterday</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Demo Banner -->
+<div class="demo-banner" id="demoBanner">
+  <i class="fas fa-info-circle me-2"></i>
+  You're viewing an interactive demo with sample data.
+  <a href="/#cta" class="demo-banner-link">Request a live demo →</a>
+  <button class="demo-banner-close" id="closeBanner"><i class="fas fa-times"></i></button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/js/demo.js"></script>
+</body>
+</html>

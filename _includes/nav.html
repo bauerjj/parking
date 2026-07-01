@@ -1,35 +1,39 @@
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
   <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header page-scroll">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#page-top">{{ site.title }}</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="hidden">
-          <a href="#page-top"></a>
+    <a class="navbar-brand fw-bold" href="#page-top">
+      <img src="/img/logo-icon.png" alt="Desert Standards" class="navbar-logo-icon">
+      <span class="navbar-brand-text">
+        <span class="brand-name-top">DESERT</span>
+        <span class="brand-name-bottom">STANDARDS</span>
+        <span class="brand-tagline">COMMUNITY COMPLIANCE</span>
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#services">Services</a>
         </li>
-        <li class="page-scroll">
-          <a href="#portfolio">Why Choose Us</a>
+        <li class="nav-item">
+          <a class="nav-link" href="#technology">Technology</a>
         </li>
-        <li class="page-scroll">
-          <a href="#about">About</a>
+        <li class="nav-item">
+          <a class="nav-link" href="#ccr">CC&R</a>
         </li>
-        <li class="page-scroll">
-          <a href="#contact">Contact</a>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
         </li>
       </ul>
+      <div class="d-flex align-items-center gap-3">
+        <a href="#" class="nav-link-login text-light text-decoration-none">
+          <i class="fas fa-sign-in-alt me-1"></i>Login
+        </a>
+        <a href="/demo/" class="btn btn-demo btn-sm px-3">Live Demo</a>
+        <a href="#cta" class="btn btn-proposal btn-sm px-3">Request Proposal</a>
+      </div>
     </div>
-    <!-- /.navbar-collapse -->
   </div>
-  <!-- /.container-fluid -->
 </nav>
