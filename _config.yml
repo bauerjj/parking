@@ -1,11 +1,19 @@
 title: Desert Standards
 email: info@desertstandards.com
 url: "https://desertstandards.com"
-description: "Professional parking enforcement, CC&R compliance patrol, and security camera installation for HOA communities and commercial properties in Phoenix, Arizona."
-keywords: "parking enforcement arizona HOA condo CC&R compliance patrol cameras Phoenix Scottsdale"
+description: "Desert Standards provides professional parking enforcement, CC&R compliance patrol, and property monitoring for HOA communities, condos, and commercial properties across Phoenix and Scottsdale, Arizona. Licensed patrol officers, GPS-verified routes, Axon body cameras, and proprietary reporting software."
+keywords: "parking enforcement Phoenix, parking enforcement Arizona, HOA parking patrol, CC&R compliance, CC&R enforcement, HOA compliance patrol, community patrol Phoenix, parking violation enforcement, HOA parking enforcement company, condo parking enforcement, property patrol Scottsdale, parking enforcement near me, HOA rule enforcement Arizona, community compliance patrol, visitor parking enforcement, fire lane enforcement HOA, CC&R inspection service"
 baseurl: ""
 plugins:
   - jekyll-sitemap
+
+exclude:
+  - patrol
+  - demo
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
 
 contact: static
 

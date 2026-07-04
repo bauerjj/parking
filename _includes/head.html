@@ -1,20 +1,187 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ site.title }} — Professional Parking Enforcement & CC&R Compliance</title>
-  <meta name="description" content="{{ site.description }}">
+  <title>{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ site.title }} — Professional Parking Enforcement & CC&R Compliance in Phoenix, AZ{% endif %}</title>
+  <meta name="description" content="{% if page.seo_description %}{{ page.seo_description }}{% else %}{{ site.description }}{% endif %}">
   <meta name="keywords" content="{{ site.keywords }}">
   <meta name="robots" content="index, follow">
+  <meta name="author" content="Desert Standards LLC">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.url }}">
+
+  <!-- Geo / Local SEO -->
+  <meta name="geo.region" content="US-AZ">
+  <meta name="geo.placename" content="Phoenix">
+  <meta name="geo.position" content="33.4484;-112.0740">
+  <meta name="ICBM" content="33.4484, -112.0740">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="{{ site.baseurl }}/img/favicon.svg">
+  <link rel="apple-touch-icon" href="{{ site.baseurl }}/img/icon-192.png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="{{ site.title }}">
-  <meta property="og:description" content="{{ site.description }}">
+  <meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}Desert Standards — Parking Enforcement & CC&R Compliance{% endif %}">
+  <meta property="og:description" content="{% if page.seo_description %}{{ page.seo_description }}{% else %}{{ site.description }}{% endif %}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ site.url }}">
+  <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.url }}">
+  <meta property="og:image" content="{{ site.url }}/img/logo.png">
+  <meta property="og:site_name" content="Desert Standards">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}Desert Standards — Parking Enforcement & CC&R Compliance{% endif %}">
+  <meta name="twitter:description" content="{% if page.seo_description %}{{ page.seo_description }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="twitter:image" content="{{ site.url }}/img/logo.png">
+
+  <!-- Structured Data: LocalBusiness + Service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Desert Standards",
+    "description": "{{ site.description | strip_newlines }}",
+    "url": "{{ site.url }}",
+    "telephone": "{{ site.footer.phone }}",
+    "email": "{{ site.email }}",
+    "image": "{{ site.url }}/img/logo.png",
+    "logo": "{{ site.url }}/img/logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Phoenix",
+      "addressRegion": "AZ",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 33.4484,
+      "longitude": -112.0740
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Phoenix",
+        "sameAs": "https://en.wikipedia.org/wiki/Phoenix,_Arizona"
+      },
+      {
+        "@type": "City",
+        "name": "Scottsdale",
+        "sameAs": "https://en.wikipedia.org/wiki/Scottsdale,_Arizona"
+      },
+      {
+        "@type": "City",
+        "name": "Tempe",
+        "sameAs": "https://en.wikipedia.org/wiki/Tempe,_Arizona"
+      },
+      {
+        "@type": "City",
+        "name": "Mesa",
+        "sameAs": "https://en.wikipedia.org/wiki/Mesa,_Arizona"
+      },
+      {
+        "@type": "City",
+        "name": "Chandler",
+        "sameAs": "https://en.wikipedia.org/wiki/Chandler,_Arizona"
+      },
+      {
+        "@type": "City",
+        "name": "Gilbert",
+        "sameAs": "https://en.wikipedia.org/wiki/Gilbert,_Arizona"
+      },
+      {
+        "@type": "City",
+        "name": "Glendale",
+        "sameAs": "https://en.wikipedia.org/wiki/Glendale,_Arizona"
+      },
+      {
+        "@type": "City",
+        "name": "Peoria",
+        "sameAs": "https://en.wikipedia.org/wiki/Peoria,_Arizona"
+      }
+    ],
+    "priceRange": "$$",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Compliance & Enforcement Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Parking Enforcement",
+            "description": "Professional parking enforcement for HOA communities, condos, and commercial properties. Fire lane monitoring, visitor parking enforcement, permit verification, and citation issuance without towing."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "CC&R Compliance Patrol",
+            "description": "Licensed patrol officers conduct community inspections to identify and document CC&R violations including architectural, landscaping, common area, and parking infractions with photographic evidence."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Property Compliance Monitoring",
+            "description": "GPS-verified patrols with Axon body cameras and proprietary reporting software providing real-time visibility into every patrol, citation, and route for HOA boards and property managers."
+          }
+        }
+      ]
+    },
+    "sameAs": []
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is parking enforcement for HOA communities?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Parking enforcement for HOA communities involves licensed patrol officers monitoring parking areas, issuing citations for violations like fire lane parking, expired visitor passes, and vehicles without permits. Desert Standards provides this service without towing, focusing on compliance through warnings and citations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does CC&R compliance patrol work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CC&R compliance patrol involves trained, licensed officers inspecting communities for rule violations including landscaping issues, architectural modifications, trash bin storage, and parking infractions. Every violation is documented with photos, GPS coordinates, and officer notes, then delivered through a digital reporting platform."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer towing services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Desert Standards focuses on compliance through education, warnings, and citations rather than towing. Our approach drives long-term behavior change without the conflict and liability associated with towing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What areas do you serve in Arizona?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Desert Standards serves HOA communities and commercial properties across the Phoenix metropolitan area including Phoenix, Scottsdale, Tempe, Mesa, Chandler, Gilbert, Glendale, and Peoria."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are your patrol officers licensed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All Desert Standards patrol officers are licensed security guards through the Arizona Department of Public Safety (AZ DPS), ensuring professionalism and legal compliance on every patrol."
+        }
+      }
+    ]
+  }
+  </script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

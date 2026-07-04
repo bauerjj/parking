@@ -1,0 +1,9 @@
+---
+layout: none
+---
+User-agent: *
+Allow: /
+Disallow: /patrol/
+Disallow: /demo/
+
+Sitemap: {{ site.url }}/sitemap.xml
