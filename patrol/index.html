@@ -11,8 +11,8 @@ layout: none
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#3D2B1F">
   <link rel="manifest" href="/patrol/manifest.json">
-  <link rel="icon" type="image/png" href="/img/logo-icon.png">
-  <link rel="apple-touch-icon" href="/img/logo-icon.png">
+  <link rel="icon" type="image/png" href="/img/icon-192.png">
+  <link rel="apple-touch-icon" href="/img/icon-192.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -717,6 +717,76 @@ layout: none
       font-size: 0.85rem;
       margin: 0;
     }
+
+    /* ---- INSTALL BANNER ---- */
+    .install-banner {
+      position: fixed;
+      bottom: 76px;
+      left: 12px;
+      right: 12px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      display: none;
+      align-items: center;
+      gap: 14px;
+      z-index: 150;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .install-banner.show { display: flex; }
+
+    .install-banner-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .install-banner-icon img { height: 30px; }
+
+    .install-banner-text {
+      flex: 1;
+    }
+
+    .install-banner-text strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+
+    .install-banner-text span {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .btn-install {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-install:hover { background: var(--accent-hover); }
+
+    .install-banner-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 4px;
+    }
   </style>
 </head>
 <body>
@@ -986,6 +1056,19 @@ layout: none
   </div>
 </div>
 
+<!-- Install Banner -->
+<div class="install-banner" id="installBanner">
+  <div class="install-banner-icon">
+    <img src="/img/icon-192.png" alt="DS">
+  </div>
+  <div class="install-banner-text">
+    <strong>Install DS Patrol</strong>
+    <span>Add to home screen for the full app experience</span>
+  </div>
+  <button class="btn-install" id="btnInstall">Install</button>
+  <button class="install-banner-close" id="btnDismissInstall"><i class="fas fa-times"></i></button>
+</div>
+
 <!-- Toast -->
 <div class="toast-msg" id="toast"></div>
 
@@ -1246,6 +1329,33 @@ function escapeHtml(str) {
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/patrol/sw.js');
 }
+
+// ---- PWA INSTALL ----
+var deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBanner').classList.add('show');
+});
+
+document.getElementById('btnInstall').addEventListener('click', function() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function(result) {
+    deferredPrompt = null;
+    document.getElementById('installBanner').classList.remove('show');
+  });
+});
+
+document.getElementById('btnDismissInstall').addEventListener('click', function() {
+  document.getElementById('installBanner').classList.remove('show');
+});
+
+window.addEventListener('appinstalled', function() {
+  document.getElementById('installBanner').classList.remove('show');
+  deferredPrompt = null;
+});
 </script>
 
 </body>
