@@ -937,6 +937,257 @@ img {
 }
 
 /* ============================================
+   RESIDENTS / PERMIT REGISTRATION PAGE
+   ============================================ */
+.residents-hero {
+  background: linear-gradient(135deg, rgba(61,43,31,0.92), rgba(74,55,40,0.88)), url('/img/community.jpg') center/cover no-repeat;
+  padding: 140px 0 60px;
+  text-align: center;
+}
+
+.residents-title {
+  color: var(--white);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.residents-subtitle {
+  color: rgba(255,255,255,0.75);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.residents-notice {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 16px 24px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.residents-notice i {
+  color: var(--accent);
+}
+
+/* Form Cards */
+.form-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.06);
+  overflow: hidden;
+  height: 100%;
+}
+
+.form-card-header {
+  background: var(--primary);
+  color: var(--white);
+  padding: 14px 24px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.form-card-body {
+  padding: 24px;
+}
+
+.form-card .form-label {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.form-card .form-text {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.form-card .form-control,
+.form-card .form-select {
+  border-color: #ddd;
+  font-size: 0.92rem;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: var(--transition);
+}
+
+.form-card .form-control:focus,
+.form-card .form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(212,132,42,0.12);
+}
+
+.required {
+  color: #c0392b;
+  font-weight: 700;
+}
+
+/* Password requirements */
+.password-requirements {
+  background: var(--light-bg);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin-top: 4px;
+}
+
+.password-requirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.password-requirements li {
+  padding: 3px 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.password-requirements li i {
+  font-size: 0.45rem;
+  margin-right: 8px;
+  vertical-align: middle;
+  color: #ccc;
+  transition: var(--transition);
+}
+
+.password-requirements li.met {
+  color: var(--accent-green);
+}
+
+.password-requirements li.met i {
+  color: var(--accent-green);
+}
+
+/* Toggle buttons (Yes/No) */
+.toggle-group {
+  display: inline-flex;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.btn-toggle {
+  background: var(--light-bg);
+  color: var(--text-dark);
+  border: 1px solid #ddd;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 6px 20px;
+  transition: var(--transition);
+}
+
+.btn-check:checked + .btn-toggle {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+
+.btn-toggle:hover {
+  background: #eee;
+}
+
+.btn-check:checked + .btn-toggle:hover {
+  background: var(--accent-hover);
+}
+
+/* Vehicle entries */
+.vehicle-entry {
+  background: var(--light-bg);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.vehicle-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.vehicle-number {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+
+.btn-add-vehicle {
+  background: transparent;
+  border: 2px dashed var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 24px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.btn-add-vehicle:hover {
+  background: rgba(212,132,42,0.08);
+  border-color: var(--accent-hover);
+  color: var(--accent-hover);
+}
+
+.btn-remove-vehicle {
+  background: transparent;
+  border: 1px solid #c0392b;
+  color: #c0392b;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.btn-remove-vehicle:hover {
+  background: #c0392b;
+  color: var(--white);
+}
+
+/* Terms checkbox */
+.form-check-input:checked {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 3px rgba(212,132,42,0.15);
+  border-color: var(--accent);
+}
+
+/* Toggle password button */
+.toggle-password {
+  border-color: #ddd;
+  color: var(--text-muted);
+}
+
+.toggle-password:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .residents-title {
+    font-size: 1.8rem;
+  }
+
+  .residents-hero {
+    padding: 120px 0 40px;
+  }
+
+  .form-card-body {
+    padding: 18px;
+  }
+}
+
+/* ============================================
    UTILITY / MISC
    ============================================ */
 ::selection {

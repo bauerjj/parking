@@ -1,0 +1,22 @@
+{
+  "name": "Desert Standards Patrol",
+  "short_name": "DS Patrol",
+  "description": "Patrol officer field app for Desert Standards",
+  "start_url": "/patrol/",
+  "display": "standalone",
+  "background_color": "#3D2B1F",
+  "theme_color": "#3D2B1F",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/img/logo-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/logo-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

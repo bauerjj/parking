@@ -1,0 +1,347 @@
+---
+layout: default
+---
+
+<section class="residents-hero" id="page-top">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h1 class="residents-title">Resident Portal</h1>
+        <p class="residents-subtitle">Register your vehicle, apply for a parking permit, and manage your account — all in one place.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding">
+  <div class="container">
+
+    <div class="residents-notice mb-5">
+      <i class="fas fa-lock me-2"></i>
+      Your information is kept secure and is only accessible to your community's management team and HOA board for the purpose of permit verification and compliance.
+    </div>
+
+    <form id="residentForm" novalidate>
+      <div class="row g-4">
+
+        <!-- Login Info -->
+        <div class="col-lg-6">
+          <div class="form-card">
+            <div class="form-card-header">
+              <i class="fas fa-user-lock me-2"></i>Login Info
+            </div>
+            <div class="form-card-body">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email <span class="required">*</span></label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password <span class="required">*</span></label>
+                <div class="input-group">
+                  <input type="password" class="form-control" id="password" required>
+                  <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password <span class="required">*</span></label>
+                <div class="input-group">
+                  <input type="password" class="form-control" id="confirmPassword" required>
+                  <button class="btn btn-outline-secondary toggle-password" type="button" data-target="confirmPassword">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personal Info -->
+        <div class="col-lg-6">
+          <div class="form-card">
+            <div class="form-card-header">
+              <i class="fas fa-user me-2"></i>Personal Info
+            </div>
+            <div class="form-card-body">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First Name <span class="required">*</span></label>
+                <input type="text" class="form-control" id="firstName" required>
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name <span class="required">*</span></label>
+                <input type="text" class="form-control" id="lastName" required>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone <span class="required">*</span></label>
+                <input type="tel" class="form-control" id="phone" required>
+              </div>
+              <div class="mb-3">
+                <label for="altPhone" class="form-label">Alt Phone</label>
+                <input type="tel" class="form-control" id="altPhone">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Community & Address -->
+        <div class="col-lg-6">
+          <div class="form-card">
+            <div class="form-card-header">
+              <i class="fas fa-building me-2"></i>Community & Address
+            </div>
+            <div class="form-card-body">
+              <div class="mb-3">
+                <label for="community" class="form-label">Community / HOA <span class="required">*</span></label>
+                <select class="form-select" id="community" required>
+                  <option value="" selected disabled>Select your community...</option>
+                  <option>Desert Ridge HOA</option>
+                  <option>Pinnacle Condos</option>
+                  <option>Scottsdale Villas</option>
+                  <option>Arcadia Estates</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="address" class="form-label">Street Address <span class="required">*</span></label>
+                <input type="text" class="form-control" id="address" required>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-4">
+                  <label for="unit" class="form-label">Unit / Lot #</label>
+                  <input type="text" class="form-control" id="unit">
+                </div>
+                <div class="col-sm-4">
+                  <label for="city" class="form-label">City <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="city" value="Phoenix" required>
+                </div>
+                <div class="col-sm-4">
+                  <label for="zip" class="form-label">ZIP <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="zip" required>
+                </div>
+              </div>
+              <div class="mt-3">
+                <label class="form-label">Mailing address same as above?</label>
+                <div class="btn-group toggle-group" role="group">
+                  <input type="radio" class="btn-check" name="mailingMatch" id="mailingYes" value="yes" checked>
+                  <label class="btn btn-toggle" for="mailingYes">Yes</label>
+                  <input type="radio" class="btn-check" name="mailingMatch" id="mailingNo" value="no">
+                  <label class="btn btn-toggle" for="mailingNo">No</label>
+                </div>
+              </div>
+              <div id="mailingFields" class="mailing-fields mt-3 d-none">
+                <div class="mb-3">
+                  <label for="mailingAddress" class="form-label">Mailing Address <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="mailingAddress">
+                </div>
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label for="mailingCity" class="form-label">City</label>
+                    <input type="text" class="form-control" id="mailingCity">
+                  </div>
+                  <div class="col-sm-3">
+                    <label for="mailingState" class="form-label">State</label>
+                    <input type="text" class="form-control" id="mailingState" value="AZ">
+                  </div>
+                  <div class="col-sm-3">
+                    <label for="mailingZip" class="form-label">ZIP</label>
+                    <input type="text" class="form-control" id="mailingZip">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Owner Info -->
+        <div class="col-lg-6">
+          <div class="form-card">
+            <div class="form-card-header">
+              <i class="fas fa-key me-2"></i>Ownership
+            </div>
+            <div class="form-card-body">
+              <div class="mb-3">
+                <label class="form-label">Are you the property owner?</label>
+                <p class="form-text mt-0 mb-2">If you are not the owner and are applying for a permit or registering a vehicle, please provide the owner's information below.</p>
+                <div class="btn-group toggle-group" role="group">
+                  <input type="radio" class="btn-check" name="isOwner" id="ownerYes" value="yes" checked>
+                  <label class="btn btn-toggle" for="ownerYes">Yes</label>
+                  <input type="radio" class="btn-check" name="isOwner" id="ownerNo" value="no">
+                  <label class="btn btn-toggle" for="ownerNo">No</label>
+                </div>
+              </div>
+              <div id="ownerFields" class="owner-fields d-none">
+                <hr>
+                <p class="small fw-semibold text-muted mb-3">Property Owner Information</p>
+                <div class="mb-3">
+                  <label for="ownerFirstName" class="form-label">First Name <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="ownerFirstName">
+                </div>
+                <div class="mb-3">
+                  <label for="ownerLastName" class="form-label">Last Name <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="ownerLastName">
+                </div>
+                <div class="mb-3">
+                  <label for="ownerPhone" class="form-label">Phone</label>
+                  <input type="tel" class="form-control" id="ownerPhone">
+                </div>
+                <div class="mb-3">
+                  <label for="ownerEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="ownerEmail">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicle Registration -->
+        <div class="col-12">
+          <div class="form-card">
+            <div class="form-card-header">
+              <i class="fas fa-car me-2"></i>Vehicle Registration
+            </div>
+            <div class="form-card-body">
+              <p class="text-muted small mb-4">Register your vehicle(s) to receive a digital parking permit for your community. You can add up to 3 vehicles.</p>
+              <div id="vehicleList">
+                <div class="vehicle-entry" data-vehicle="1">
+                  <div class="vehicle-entry-header">
+                    <span class="vehicle-number">Vehicle 1</span>
+                  </div>
+                  <div class="row g-3">
+                    <div class="col-md-3">
+                      <label class="form-label">Year <span class="required">*</span></label>
+                      <input type="text" class="form-control" placeholder="e.g. 2022" required>
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label">Make <span class="required">*</span></label>
+                      <input type="text" class="form-control" placeholder="e.g. Toyota" required>
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label">Model <span class="required">*</span></label>
+                      <input type="text" class="form-control" placeholder="e.g. Camry" required>
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label">Color <span class="required">*</span></label>
+                      <input type="text" class="form-control" placeholder="e.g. Silver" required>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">License Plate <span class="required">*</span></label>
+                      <input type="text" class="form-control" placeholder="e.g. ABC1234" required>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">State</label>
+                      <input type="text" class="form-control" value="AZ">
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">Permit Type</label>
+                      <select class="form-select">
+                        <option>Resident</option>
+                        <option>Visitor (Extended)</option>
+                        <option>Temporary</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-add-vehicle mt-3" id="addVehicle">
+                <i class="fas fa-plus me-2"></i>Add Another Vehicle
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terms and Submit -->
+        <div class="col-12">
+          <div class="form-card">
+            <div class="form-card-body text-center py-4">
+              <div class="form-check d-inline-flex align-items-center gap-2 mb-4">
+                <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                <label class="form-check-label" for="agreeTerms">
+                  By registering, I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>
+                </label>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-proposal btn-lg px-5">
+                  <i class="fas fa-plus me-2"></i>Submit Registration
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Toggle password visibility
+  document.querySelectorAll('.toggle-password').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var target = document.getElementById(this.dataset.target);
+      var icon = this.querySelector('i');
+      if (target.type === 'password') {
+        target.type = 'text';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+      } else {
+        target.type = 'password';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+      }
+    });
+  });
+
+  // Mailing address toggle
+  document.querySelectorAll('input[name="mailingMatch"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      document.getElementById('mailingFields').classList.toggle('d-none', this.value === 'yes');
+    });
+  });
+
+  // Owner toggle
+  document.querySelectorAll('input[name="isOwner"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      document.getElementById('ownerFields').classList.toggle('d-none', this.value === 'yes');
+    });
+  });
+
+  // Add vehicle
+  var vehicleCount = 1;
+  document.getElementById('addVehicle').addEventListener('click', function() {
+    if (vehicleCount >= 3) return;
+    vehicleCount++;
+    var template = document.querySelector('.vehicle-entry').cloneNode(true);
+    template.dataset.vehicle = vehicleCount;
+    template.querySelector('.vehicle-number').textContent = 'Vehicle ' + vehicleCount;
+    template.querySelectorAll('input').forEach(function(input) { input.value = ''; });
+    template.querySelectorAll('select').forEach(function(s) { s.selectedIndex = 0; });
+    // Add remove button
+    var removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'btn btn-sm btn-remove-vehicle';
+    removeBtn.innerHTML = '<i class="fas fa-times me-1"></i>Remove';
+    removeBtn.addEventListener('click', function() {
+      template.remove();
+      vehicleCount--;
+      renumberVehicles();
+      document.getElementById('addVehicle').classList.remove('d-none');
+    });
+    template.querySelector('.vehicle-entry-header').appendChild(removeBtn);
+    document.getElementById('vehicleList').appendChild(template);
+    if (vehicleCount >= 3) this.classList.add('d-none');
+  });
+
+  function renumberVehicles() {
+    document.querySelectorAll('.vehicle-entry').forEach(function(entry, i) {
+      entry.querySelector('.vehicle-number').textContent = 'Vehicle ' + (i + 1);
+      entry.dataset.vehicle = i + 1;
+    });
+  }
+
+  // Form submit
+  document.getElementById('residentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Thank you for registering! Your permit application has been submitted and is pending review. You will receive a confirmation email shortly.');
+  });
+});
+</script>

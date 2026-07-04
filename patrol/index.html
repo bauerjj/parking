@@ -1,0 +1,1252 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>DS Patrol</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#3D2B1F">
+  <link rel="manifest" href="/patrol/manifest.json">
+  <link rel="icon" type="image/png" href="/img/logo-icon.png">
+  <link rel="apple-touch-icon" href="/img/logo-icon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #3D2B1F;
+      --primary-light: #4A3728;
+      --accent: #D4842A;
+      --accent-hover: #BF7424;
+      --green: #4A6B35;
+      --green-light: #5a8344;
+      --red: #B43C2D;
+      --light-bg: #FAF7F2;
+      --text-dark: #3D2B1F;
+      --text-muted: #7A6B5D;
+      --radius: 10px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f1ec;
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      padding-top: 60px;
+      padding-bottom: 72px;
+      min-height: 100vh;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ---- TOP BAR ---- */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 100;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topbar-brand img {
+      height: 36px;
+    }
+
+    .topbar-brand span {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .shift-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      color: #fff;
+    }
+
+    .shift-badge.off { background: rgba(255,255,255,0.15); }
+    .shift-badge.on { background: var(--green); }
+
+    .shift-badge i.pulse {
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .topbar-sync {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      position: relative;
+    }
+
+    .topbar-sync .sync-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      position: absolute;
+      top: -1px;
+      right: -3px;
+    }
+
+    /* ---- BOTTOM NAV ---- */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: calc(68px + var(--safe-bottom));
+      padding-bottom: var(--safe-bottom);
+      background: #fff;
+      border-top: 1px solid #e0dbd5;
+      display: flex;
+      z-index: 100;
+    }
+
+    .bottom-nav a {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+      padding: 6px 0;
+    }
+
+    .bottom-nav a i { font-size: 1.15rem; }
+    .bottom-nav a.active { color: var(--accent); }
+    .bottom-nav a.nav-cite { position: relative; }
+
+    .bottom-nav a.nav-cite .cite-ring {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.3rem;
+      margin-top: -22px;
+      box-shadow: 0 2px 12px rgba(212,132,42,0.35);
+    }
+
+    /* ---- PAGES ---- */
+    .page { display: none; padding: 16px; }
+    .page.active { display: block; }
+
+    .page-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+
+    /* ---- CARDS ---- */
+    .app-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(61,43,31,0.06);
+    }
+
+    .app-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .app-card-header h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--primary);
+    }
+
+    /* ---- SHIFT PANEL ---- */
+    .shift-panel {
+      background: var(--primary);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .shift-panel p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 12px;
+    }
+
+    .shift-timer {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .shift-property {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+
+    .btn-shift {
+      border: none;
+      padding: 12px 36px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-shift-start {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .btn-shift-start:hover { background: var(--green-light); }
+
+    .btn-shift-end {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .btn-shift-end:hover { opacity: 0.9; }
+
+    /* ---- QUICK STATS ---- */
+    .quick-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .quick-stat {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 14px 10px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(61,43,31,0.06);
+    }
+
+    .quick-stat-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+    }
+
+    .quick-stat-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ---- GPS TRACK ---- */
+    .gps-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .gps-status.tracking {
+      background: rgba(74,107,53,0.1);
+      color: var(--green);
+    }
+
+    .gps-status.idle {
+      background: rgba(122,107,93,0.1);
+      color: var(--text-muted);
+    }
+
+    .gps-status i.pulse { animation: pulse 1.5s infinite; }
+
+    .gps-snapshot {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0ede8;
+      font-size: 0.82rem;
+    }
+
+    .gps-snapshot:last-child { border-bottom: none; }
+
+    .gps-snapshot-time {
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 55px;
+    }
+
+    .gps-snapshot-coords {
+      color: var(--text-muted);
+      flex: 1;
+    }
+
+    .gps-snapshot-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(212,132,42,0.1);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+    }
+
+    /* ---- CITATION FORM ---- */
+    .cite-form label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .cite-form .form-control,
+    .cite-form .form-select {
+      font-size: 0.88rem;
+      border-color: #ddd;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .cite-form .form-control:focus,
+    .cite-form .form-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212,132,42,0.1);
+    }
+
+    .photo-upload-area {
+      border: 2px dashed #d0cbc4;
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .photo-upload-area:hover,
+    .photo-upload-area.dragover {
+      border-color: var(--accent);
+      background: rgba(212,132,42,0.04);
+    }
+
+    .photo-upload-area i {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .photo-upload-area p {
+      font-size: 0.82rem;
+      margin: 0;
+    }
+
+    .photo-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .photo-preview {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: #eee;
+    }
+
+    .photo-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-preview .remove-photo {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      font-size: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .violation-type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .violation-type-btn {
+      border: 2px solid #e0dbd5;
+      background: #fff;
+      border-radius: 8px;
+      padding: 12px 10px;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .violation-type-btn i {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .violation-type-btn.selected {
+      border-color: var(--accent);
+      background: rgba(212,132,42,0.06);
+      color: var(--accent);
+    }
+
+    .btn-submit-citation {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 14px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-submit-citation:hover { background: var(--accent-hover); }
+
+    .escalate-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: rgba(180,60,45,0.06);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--red);
+      cursor: pointer;
+    }
+
+    .escalate-toggle input { display: none; }
+
+    .escalate-check {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--red);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: transparent;
+      transition: all 0.2s;
+    }
+
+    .escalate-toggle input:checked ~ .escalate-check {
+      background: var(--red);
+      color: #fff;
+    }
+
+    /* ---- ACTIVITY LOG ---- */
+    .activity-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0ede8;
+      align-items: flex-start;
+    }
+
+    .activity-item:last-child { border-bottom: none; }
+
+    .activity-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .activity-icon.parking { background: rgba(212,132,42,0.1); color: var(--accent); }
+    .activity-icon.ccr { background: rgba(74,107,53,0.1); color: var(--green); }
+    .activity-icon.note { background: rgba(122,107,93,0.1); color: var(--text-muted); }
+    .activity-icon.gps { background: rgba(61,43,31,0.08); color: var(--primary); }
+    .activity-icon.escalated { background: rgba(180,60,45,0.1); color: var(--red); }
+
+    .activity-body { flex: 1; min-width: 0; }
+
+    .activity-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .activity-detail {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .activity-time {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .activity-escalate-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      background: var(--red);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+      text-transform: uppercase;
+    }
+
+    /* ---- ROUTE NOTES ---- */
+    .note-input-area {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .note-input-area textarea {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      resize: none;
+      height: 44px;
+      transition: all 0.2s;
+    }
+
+    .note-input-area textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212,132,42,0.1);
+      outline: none;
+      height: 80px;
+    }
+
+    .btn-add-note {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .btn-add-note:hover { background: var(--accent-hover); }
+
+    /* ---- SELECT PROPERTY MODAL ---- */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modal-overlay.show { display: flex; }
+
+    .modal-sheet {
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      width: 100%;
+      max-width: 500px;
+      max-height: 70vh;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-sheet h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .property-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      border: 2px solid #e0dbd5;
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .property-option:hover,
+    .property-option.selected {
+      border-color: var(--accent);
+      background: rgba(212,132,42,0.04);
+    }
+
+    .property-option i {
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    .property-option span {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ---- SUCCESS TOAST ---- */
+    .toast-msg {
+      position: fixed;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: var(--green);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 300;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast-msg.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ---- EMPTY STATE ---- */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-state i {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      opacity: 0.3;
+    }
+
+    .empty-state p {
+      font-size: 0.85rem;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="topbar">
+  <div class="topbar-brand">
+    <img src="/img/logo-icon.png" alt="DS">
+    <span>PATROL</span>
+  </div>
+  <div class="topbar-right">
+    <div class="shift-badge off" id="shiftBadge">
+      <i class="fas fa-circle" style="font-size:0.45rem;"></i>
+      <span id="shiftBadgeText">Off Duty</span>
+    </div>
+    <div class="topbar-sync" id="syncBtn" title="Sync status">
+      <i class="fas fa-cloud-arrow-up"></i>
+      <div class="sync-dot"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== DASHBOARD PAGE ========== -->
+<div class="page active" id="page-home">
+  <!-- Shift Panel -->
+  <div class="shift-panel" id="shiftPanel">
+    <p id="shiftLabel">Start your shift to begin tracking</p>
+    <div class="shift-timer" id="shiftTimer">00:00:00</div>
+    <div class="shift-property" id="shiftPropertyLabel">No property selected</div>
+    <button class="btn-shift btn-shift-start" id="btnShift" onclick="toggleShift()">
+      <i class="fas fa-play me-2"></i>Start Shift
+    </button>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="quick-stats">
+    <div class="quick-stat">
+      <span class="quick-stat-value" id="statCitations">0</span>
+      <span class="quick-stat-label">Citations</span>
+    </div>
+    <div class="quick-stat">
+      <span class="quick-stat-value" id="statPhotos">0</span>
+      <span class="quick-stat-label">Photos</span>
+    </div>
+    <div class="quick-stat">
+      <span class="quick-stat-value" id="statSnapshots">0</span>
+      <span class="quick-stat-label">GPS Snaps</span>
+    </div>
+  </div>
+
+  <!-- Recent Activity -->
+  <div class="app-card">
+    <div class="app-card-header">
+      <h3>Activity This Shift</h3>
+    </div>
+    <div id="activityList">
+      <div class="empty-state">
+        <i class="fas fa-clipboard-list"></i>
+        <p>No activity yet — start your shift</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== NEW CITATION PAGE ========== -->
+<div class="page" id="page-cite">
+  <h2 class="page-title">New Citation</h2>
+
+  <form class="cite-form" id="citationForm" onsubmit="submitCitation(event)">
+    <!-- Violation Type -->
+    <label class="mb-2">Violation Type</label>
+    <div class="violation-type-grid">
+      <div class="violation-type-btn selected" data-type="parking" onclick="selectViolationType(this)">
+        <i class="fas fa-car"></i>Parking
+      </div>
+      <div class="violation-type-btn" data-type="ccr" onclick="selectViolationType(this)">
+        <i class="fas fa-clipboard-check"></i>CC&R
+      </div>
+      <div class="violation-type-btn" data-type="fire-lane" onclick="selectViolationType(this)">
+        <i class="fas fa-fire-extinguisher"></i>Fire Lane
+      </div>
+      <div class="violation-type-btn" data-type="abandoned" onclick="selectViolationType(this)">
+        <i class="fas fa-car-burst"></i>Abandoned
+      </div>
+    </div>
+
+    <!-- Violation Detail -->
+    <div class="mb-3">
+      <label class="form-label">Violation</label>
+      <select class="form-select" id="violationSelect">
+        <option>No permit displayed</option>
+        <option>Parked in visitor spot (no pass)</option>
+        <option>Expired visitor pass</option>
+        <option>Fire lane / no-parking zone</option>
+        <option>Blocking fire hydrant</option>
+        <option>RV / oversized vehicle</option>
+        <option>Abandoned / inoperable vehicle</option>
+        <option>Landscape parking</option>
+        <option>Handicapped zone (no placard)</option>
+        <option>Trash bins out past deadline</option>
+        <option>Unapproved exterior modification</option>
+        <option>Landscaping violation</option>
+        <option>Noise disturbance</option>
+        <option>Pet waste / leash violation</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <!-- Location -->
+    <div class="row g-2 mb-3">
+      <div class="col-6">
+        <label class="form-label">Lot / Unit</label>
+        <input type="text" class="form-control" id="citeLot" placeholder="e.g. 42">
+      </div>
+      <div class="col-6">
+        <label class="form-label">Street</label>
+        <input type="text" class="form-control" id="citeStreet" placeholder="e.g. Maple Dr">
+      </div>
+    </div>
+
+    <!-- Vehicle Info -->
+    <div class="app-card mb-3" style="padding:12px;">
+      <div class="app-card-header" style="margin-bottom:8px;">
+        <h3><i class="fas fa-car me-2"></i>Vehicle Info</h3>
+      </div>
+      <div class="row g-2">
+        <div class="col-6">
+          <label class="form-label">License Plate</label>
+          <input type="text" class="form-control" id="citePlate" placeholder="ABC1234">
+        </div>
+        <div class="col-6">
+          <label class="form-label">State</label>
+          <input type="text" class="form-control" id="citeState" value="AZ">
+        </div>
+        <div class="col-4">
+          <label class="form-label">Color</label>
+          <input type="text" class="form-control" id="citeColor" placeholder="Silver">
+        </div>
+        <div class="col-4">
+          <label class="form-label">Make</label>
+          <input type="text" class="form-control" id="citeMake" placeholder="Toyota">
+        </div>
+        <div class="col-4">
+          <label class="form-label">Model</label>
+          <input type="text" class="form-control" id="citeModel" placeholder="Camry">
+        </div>
+      </div>
+    </div>
+
+    <!-- Photos -->
+    <label class="form-label mb-2">Photos</label>
+    <div class="photo-upload-area" id="photoArea" onclick="document.getElementById('photoInput').click()">
+      <i class="fas fa-camera"></i>
+      <p>Tap to take a photo or upload</p>
+    </div>
+    <input type="file" id="photoInput" accept="image/*" capture="environment" multiple style="display:none;" onchange="handlePhotos(this.files)">
+    <div class="photo-preview-grid" id="photoGrid"></div>
+
+    <!-- Notes -->
+    <div class="mb-3 mt-3">
+      <label class="form-label">Officer Notes</label>
+      <textarea class="form-control" id="citeNotes" rows="3" placeholder="Additional observations..."></textarea>
+    </div>
+
+    <!-- Escalation Flag -->
+    <label class="escalate-toggle" onclick="this.querySelector('input').click()">
+      <input type="checkbox" id="escalateCheck">
+      <span class="escalate-check"><i class="fas fa-check"></i></span>
+      <span><i class="fas fa-flag me-1"></i>Flag as repeat offender / escalate</span>
+    </label>
+
+    <!-- Submit -->
+    <button type="submit" class="btn-submit-citation">
+      <i class="fas fa-paper-plane me-2"></i>Submit Citation
+    </button>
+  </form>
+</div>
+
+<!-- ========== ROUTE / GPS PAGE ========== -->
+<div class="page" id="page-route">
+  <h2 class="page-title">Route & Notes</h2>
+
+  <!-- GPS Status -->
+  <div class="gps-status idle" id="gpsStatus">
+    <i class="fas fa-location-dot"></i>
+    <span id="gpsStatusText">GPS idle — start shift to track</span>
+  </div>
+
+  <!-- Route Notes -->
+  <div class="app-card">
+    <div class="app-card-header">
+      <h3><i class="fas fa-pen me-2"></i>Route Notes</h3>
+    </div>
+    <div class="note-input-area">
+      <textarea id="noteInput" placeholder="Add a note about your route..."></textarea>
+      <button class="btn-add-note" onclick="addNote()"><i class="fas fa-plus"></i></button>
+    </div>
+    <div id="notesList">
+      <div class="empty-state">
+        <i class="fas fa-sticky-note"></i>
+        <p>No notes yet</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GPS Snapshots -->
+  <div class="app-card mt-3">
+    <div class="app-card-header">
+      <h3><i class="fas fa-satellite-dish me-2"></i>GPS Snapshots (10 min)</h3>
+    </div>
+    <div id="gpsList">
+      <div class="empty-state">
+        <i class="fas fa-map-pin"></i>
+        <p>Snapshots appear here during shift</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== HISTORY PAGE ========== -->
+<div class="page" id="page-history">
+  <h2 class="page-title">Shift History</h2>
+  <div id="historyList">
+    <div class="empty-state">
+      <i class="fas fa-clock-rotate-left"></i>
+      <p>Past shift citations will appear here</p>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <a href="#" class="active" data-page="home" onclick="showPage('home',this)">
+    <i class="fas fa-th-large"></i>Home
+  </a>
+  <a href="#" data-page="route" onclick="showPage('route',this)">
+    <i class="fas fa-route"></i>Route
+  </a>
+  <a href="#" class="nav-cite" data-page="cite" onclick="showPage('cite',this)">
+    <div class="cite-ring"><i class="fas fa-plus"></i></div>
+    Cite
+  </a>
+  <a href="#" data-page="history" onclick="showPage('history',this)">
+    <i class="fas fa-clock-rotate-left"></i>History
+  </a>
+  <a href="/" data-page="site">
+    <i class="fas fa-globe"></i>Site
+  </a>
+</nav>
+
+<!-- Property Select Modal -->
+<div class="modal-overlay" id="propertyModal">
+  <div class="modal-sheet">
+    <h3>Select Property</h3>
+    <div class="property-option" onclick="selectProperty('Desert Ridge HOA')">
+      <i class="fas fa-building"></i><span>Desert Ridge HOA</span>
+    </div>
+    <div class="property-option" onclick="selectProperty('Pinnacle Condos')">
+      <i class="fas fa-building"></i><span>Pinnacle Condos</span>
+    </div>
+    <div class="property-option" onclick="selectProperty('Scottsdale Villas')">
+      <i class="fas fa-building"></i><span>Scottsdale Villas</span>
+    </div>
+    <div class="property-option" onclick="selectProperty('Arcadia Estates')">
+      <i class="fas fa-building"></i><span>Arcadia Estates</span>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-msg" id="toast"></div>
+
+<script>
+// ---- STATE ----
+var shiftActive = false;
+var shiftStart = null;
+var shiftTimerInterval = null;
+var gpsInterval = null;
+var selectedProperty = '';
+var citationPhotos = [];
+var stats = { citations: 0, photos: 0, snapshots: 0 };
+var activities = [];
+var notes = [];
+
+// ---- NAV ----
+function showPage(name, el) {
+  if (el) el.preventDefault;
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.bottom-nav a').forEach(function(a) { a.classList.remove('active'); });
+  document.getElementById('page-' + name).classList.add('active');
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ---- SHIFT ----
+function toggleShift() {
+  if (!shiftActive) {
+    document.getElementById('propertyModal').classList.add('show');
+  } else {
+    endShift();
+  }
+}
+
+function selectProperty(name) {
+  selectedProperty = name;
+  document.getElementById('propertyModal').classList.remove('show');
+  startShift();
+}
+
+function startShift() {
+  shiftActive = true;
+  shiftStart = new Date();
+
+  document.getElementById('btnShift').className = 'btn-shift btn-shift-end';
+  document.getElementById('btnShift').innerHTML = '<i class="fas fa-stop me-2"></i>End Shift';
+  document.getElementById('shiftLabel').textContent = 'Shift in progress';
+  document.getElementById('shiftPropertyLabel').textContent = selectedProperty;
+  document.getElementById('shiftBadge').className = 'shift-badge on';
+  document.getElementById('shiftBadgeText').textContent = 'On Duty';
+  document.getElementById('shiftBadge').querySelector('i').classList.add('pulse');
+  document.getElementById('gpsStatus').className = 'gps-status tracking';
+  document.getElementById('gpsStatusText').innerHTML = '<i class="fas fa-circle pulse" style="font-size:0.4rem;margin-right:4px;"></i> GPS tracking active — snapshots every 10 min';
+
+  shiftTimerInterval = setInterval(updateTimer, 1000);
+  takeGpsSnapshot();
+  gpsInterval = setInterval(takeGpsSnapshot, 600000);
+
+  addActivity('gps', 'Shift started', selectedProperty, false);
+  showToast('Shift started — GPS tracking active');
+}
+
+function endShift() {
+  shiftActive = false;
+  clearInterval(shiftTimerInterval);
+  clearInterval(gpsInterval);
+
+  document.getElementById('btnShift').className = 'btn-shift btn-shift-start';
+  document.getElementById('btnShift').innerHTML = '<i class="fas fa-play me-2"></i>Start Shift';
+  document.getElementById('shiftLabel').textContent = 'Start your shift to begin tracking';
+  document.getElementById('shiftPropertyLabel').textContent = 'No property selected';
+  document.getElementById('shiftBadge').className = 'shift-badge off';
+  document.getElementById('shiftBadgeText').textContent = 'Off Duty';
+  document.getElementById('shiftBadge').querySelector('i').classList.remove('pulse');
+  document.getElementById('gpsStatus').className = 'gps-status idle';
+  document.getElementById('gpsStatusText').textContent = 'GPS idle — start shift to track';
+
+  addActivity('gps', 'Shift ended', formatDuration(new Date() - shiftStart), false);
+  showToast('Shift ended');
+}
+
+function updateTimer() {
+  var diff = new Date() - shiftStart;
+  document.getElementById('shiftTimer').textContent = formatDuration(diff);
+}
+
+function formatDuration(ms) {
+  var s = Math.floor(ms / 1000);
+  var h = String(Math.floor(s / 3600)).padStart(2, '0');
+  var m = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+  var sec = String(s % 60).padStart(2, '0');
+  return h + ':' + m + ':' + sec;
+}
+
+// ---- GPS ----
+function takeGpsSnapshot() {
+  if (!navigator.geolocation) {
+    addGpsEntry('--:--', 'Geolocation not supported');
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    var lat = pos.coords.latitude.toFixed(5);
+    var lng = pos.coords.longitude.toFixed(5);
+    var now = new Date();
+    var time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    addGpsEntry(time, lat + ', ' + lng);
+    stats.snapshots++;
+    updateStats();
+    addActivity('gps', 'GPS snapshot', lat + ', ' + lng, false);
+  }, function() {
+    var now = new Date();
+    var time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    addGpsEntry(time, 'Location unavailable');
+  }, { enableHighAccuracy: true });
+}
+
+function addGpsEntry(time, coords) {
+  var list = document.getElementById('gpsList');
+  if (list.querySelector('.empty-state')) list.innerHTML = '';
+  var div = document.createElement('div');
+  div.className = 'gps-snapshot';
+  div.innerHTML = '<div class="gps-snapshot-icon"><i class="fas fa-location-dot"></i></div>' +
+    '<span class="gps-snapshot-time">' + time + '</span>' +
+    '<span class="gps-snapshot-coords">' + coords + '</span>';
+  list.prepend(div);
+}
+
+// ---- CITATIONS ----
+function selectViolationType(el) {
+  document.querySelectorAll('.violation-type-btn').forEach(function(b) { b.classList.remove('selected'); });
+  el.classList.add('selected');
+}
+
+function handlePhotos(files) {
+  for (var i = 0; i < files.length; i++) {
+    if (citationPhotos.length >= 6) break;
+    var file = files[i];
+    citationPhotos.push(file);
+    var reader = new FileReader();
+    reader.onload = (function(idx) {
+      return function(e) {
+        var grid = document.getElementById('photoGrid');
+        var div = document.createElement('div');
+        div.className = 'photo-preview';
+        div.innerHTML = '<img src="' + e.target.result + '"><button type="button" class="remove-photo" onclick="removePhoto(' + idx + ',this)"><i class="fas fa-times"></i></button>';
+        grid.appendChild(div);
+        stats.photos++;
+        updateStats();
+      };
+    })(citationPhotos.length - 1);
+    reader.readAsDataURL(file);
+  }
+}
+
+function removePhoto(idx, btn) {
+  btn.parentElement.remove();
+  stats.photos = Math.max(0, stats.photos - 1);
+  updateStats();
+}
+
+function submitCitation(e) {
+  e.preventDefault();
+  if (!shiftActive) {
+    showToast('Start a shift before submitting');
+    return;
+  }
+
+  var type = document.querySelector('.violation-type-btn.selected').dataset.type;
+  var violation = document.getElementById('violationSelect').value;
+  var lot = document.getElementById('citeLot').value || '—';
+  var escalated = document.getElementById('escalateCheck').checked;
+  var iconClass = (type === 'ccr') ? 'ccr' : 'parking';
+  if (escalated) iconClass = 'escalated';
+
+  stats.citations++;
+  updateStats();
+  addActivity(iconClass, violation, 'Lot ' + lot + ' — ' + selectedProperty, escalated);
+
+  document.getElementById('citationForm').reset();
+  document.getElementById('photoGrid').innerHTML = '';
+  citationPhotos = [];
+  document.querySelector('.violation-type-btn[data-type="parking"]').classList.add('selected');
+
+  showToast('Citation submitted');
+  showPage('home', document.querySelector('.bottom-nav a[data-page="home"]'));
+}
+
+// ---- NOTES ----
+function addNote() {
+  var input = document.getElementById('noteInput');
+  var text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  input.style.height = '44px';
+
+  var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  var list = document.getElementById('notesList');
+  if (list.querySelector('.empty-state')) list.innerHTML = '';
+
+  var div = document.createElement('div');
+  div.className = 'activity-item';
+  div.innerHTML = '<div class="activity-icon note"><i class="fas fa-sticky-note"></i></div>' +
+    '<div class="activity-body"><div class="activity-title">' + escapeHtml(text) + '</div></div>' +
+    '<span class="activity-time">' + time + '</span>';
+  list.prepend(div);
+
+  addActivity('note', 'Route note', text, false);
+  showToast('Note saved');
+}
+
+// ---- ACTIVITY LOG ----
+function addActivity(type, title, detail, escalated) {
+  var list = document.getElementById('activityList');
+  if (list.querySelector('.empty-state')) list.innerHTML = '';
+
+  var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  var icons = {
+    parking: 'fa-car',
+    ccr: 'fa-clipboard-check',
+    note: 'fa-sticky-note',
+    gps: 'fa-location-dot',
+    escalated: 'fa-flag'
+  };
+
+  var badge = escalated ? '<span class="activity-escalate-badge">Escalated</span>' : '';
+  var div = document.createElement('div');
+  div.className = 'activity-item';
+  div.innerHTML = '<div class="activity-icon ' + type + '"><i class="fas ' + (icons[type] || 'fa-circle') + '"></i></div>' +
+    '<div class="activity-body"><div class="activity-title">' + escapeHtml(title) + badge + '</div>' +
+    '<div class="activity-detail">' + escapeHtml(detail) + '</div></div>' +
+    '<span class="activity-time">' + time + '</span>';
+  list.prepend(div);
+}
+
+// ---- STATS ----
+function updateStats() {
+  document.getElementById('statCitations').textContent = stats.citations;
+  document.getElementById('statPhotos').textContent = stats.photos;
+  document.getElementById('statSnapshots').textContent = stats.snapshots;
+}
+
+// ---- TOAST ----
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2500);
+}
+
+// ---- UTIL ----
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
+// ---- SERVICE WORKER ----
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/patrol/sw.js');
+}
+</script>
+
+</body>
+</html>
