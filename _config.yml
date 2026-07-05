@@ -8,8 +8,6 @@ plugins:
   - jekyll-sitemap
 
 exclude:
-  - patrol
-  - demo
   - Gemfile
   - Gemfile.lock
   - vendor
