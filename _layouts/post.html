@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include head.html %}
+<body>
+  {% include nav.html %}
+
+  <article class="blog-post">
+    <header class="post-hero">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <a href="/blog/" class="post-back"><i class="fas fa-arrow-left me-1"></i>All Articles</a>
+            <h1 class="post-title">{{ page.title }}</h1>
+            <div class="post-meta">
+              <span><i class="fas fa-calendar-alt me-1"></i>{{ page.date | date: "%B %-d, %Y" }}</span>
+              {% if page.author %}<span><i class="fas fa-user me-1"></i>{{ page.author }}</span>{% endif %}
+              {% if page.read_time %}<span><i class="fas fa-clock me-1"></i>{{ page.read_time }} min read</span>{% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="post-body section-padding">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="post-content">
+              {{ content }}
+            </div>
+
+            <div class="post-disclaimer">
+              <i class="fas fa-exclamation-circle me-2"></i>
+              <strong>Disclaimer:</strong> This article is for informational purposes only and does not constitute legal advice. For specific legal questions, consult a licensed attorney in your jurisdiction.
+            </div>
+
+            <div class="post-cta">
+              <h4>Need Professional Parking Enforcement or CC&R Compliance?</h4>
+              <p>Desert Standards provides licensed patrol officers, GPS-verified routes, Axon&reg; body cameras, and proprietary reporting software for HOA communities across Phoenix.</p>
+              <a href="/#cta" class="btn btn-proposal">Request a Proposal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  {% include footer.html %}
+  {% include js.html %}
+</body>
+</html>

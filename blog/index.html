@@ -1,0 +1,45 @@
+---
+layout: default
+seo_title: "Blog — Desert Standards | Parking Enforcement & HOA Compliance in Phoenix, AZ"
+seo_description: "Articles about HOA parking enforcement, CC&R compliance, towing laws, and community management in Phoenix, Arizona."
+---
+
+<section class="blog-hero" id="page-top">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h1 class="blog-hero-title">Blog</h1>
+        <p class="blog-hero-subtitle">Guides, insights, and answers to common questions about parking enforcement, CC&R compliance, and HOA community management in Arizona.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        {% for post in site.posts %}
+        <a href="{{ post.url }}" class="blog-card-link">
+          <div class="blog-card">
+            <div class="blog-card-body">
+              {% if post.category %}
+              <span class="blog-category">{{ post.category }}</span>
+              {% endif %}
+              <h2 class="blog-card-title">{{ post.title }}</h2>
+              <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</p>
+              <div class="blog-card-meta">
+                <span><i class="fas fa-calendar-alt me-1"></i>{{ post.date | date: "%B %-d, %Y" }}</span>
+                {% if post.read_time %}<span><i class="fas fa-clock me-1"></i>{{ post.read_time }} min read</span>{% endif %}
+              </div>
+            </div>
+            <div class="blog-card-arrow">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

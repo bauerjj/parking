@@ -35,4 +35,4 @@ address:
   - line: "Phoenix, AZ Metro Area"
 
 markdown: kramdown
-permalink: pretty
+permalink: /blog/:slug/
