@@ -1914,6 +1914,167 @@ img {
 }
 
 /* ============================================
+   CAREERS PAGE
+   ============================================ */
+.careers-hero {
+  background: linear-gradient(135deg, rgba(61,43,31,0.92), rgba(74,55,40,0.88)), url('/img/community.jpg') center/cover no-repeat;
+  padding: 140px 0 60px;
+  text-align: center;
+}
+
+.careers-title {
+  color: var(--white);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.careers-subtitle {
+  color: rgba(255,255,255,0.75);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.careers-intro {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.careers-email {
+  font-size: 1.1rem;
+  margin-top: 12px;
+}
+
+.careers-email a {
+  color: var(--accent);
+}
+
+.job-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.06);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.job-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.job-header {
+  padding: 24px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.job-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.job-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.job-meta span {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.job-meta i {
+  color: var(--accent);
+}
+
+.job-badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.badge-tech {
+  background: rgba(74,107,53,0.1);
+  color: var(--accent-green);
+}
+
+.badge-patrol {
+  background: rgba(212,132,42,0.1);
+  color: var(--accent);
+}
+
+.job-body {
+  padding: 24px 30px;
+}
+
+.job-body p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.job-body h5 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.job-body ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.job-body ul li {
+  padding: 3px 0;
+  color: var(--text-muted);
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+
+.job-footer {
+  padding: 20px 30px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  background: var(--light-bg);
+}
+
+@media (max-width: 768px) {
+  .careers-title {
+    font-size: 1.8rem;
+  }
+
+  .careers-hero {
+    padding: 120px 0 40px;
+  }
+
+  .job-header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .job-body, .job-footer {
+    padding: 20px;
+  }
+}
+
+/* ============================================
    UTILITY / MISC
    ============================================ */
 ::selection {
