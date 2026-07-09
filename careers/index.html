@@ -43,31 +43,47 @@ seo_description: "Desert Standards is hiring in Phoenix, AZ. Open positions for 
           </div>
 
           <div class="job-body">
-            <p>We're building a proprietary compliance and patrol management platform from scratch — GPS tracking, citation management, body camera integration, real-time dashboards, and reporting tools used by HOA boards and property managers across Arizona. You'll have a direct hand in shaping the product.</p>
+            <p>We're building a proprietary compliance and patrol management platform from the ground up — ALPR-powered license plate scanning, a mobile patrol app, GPS tracking, citation management, Axon body camera integration, real-time dashboards, and reporting tools used by HOA boards and property managers across Arizona. You'll have a direct hand in shaping every layer of the product.</p>
 
-            <h5>What You'll Do</h5>
+            <h5>What You'll Build</h5>
             <ul>
-              <li>Design, build, and ship features across our full-stack web platform</li>
-              <li>Build dashboards and reporting tools for property managers and HOA boards</li>
-              <li>Integrate with GPS hardware, Axon body camera systems, and mobile patrol apps</li>
-              <li>Work directly with the founder to define product direction and priorities</li>
-              <li>Own your code from prototype through production</li>
+              <li><strong>ALPR Integration</strong> — Build the pipeline that connects vehicle-mounted or phone-based license plate recognition cameras to our backend. Process plate reads in real time, match against permit databases, and trigger automated violation workflows</li>
+              <li><strong>Mobile Patrol App</strong> — Develop a cross-platform app (React Native or Flutter) used by patrol officers nightly to scan plates, issue citations, capture photos, log GPS routes, and sync everything to the cloud in real time — including offline-first support for areas with poor connectivity</li>
+              <li><strong>Web Dashboard</strong> — Build the property manager and HOA board-facing portal: citation management, repeat offender tracking, GPS route playback, compliance analytics, and exportable reports</li>
+              <li><strong>Camera &amp; Hardware Integration</strong> — Integrate with Axon body camera APIs, ALPR hardware (OpenALPR / Rekor / custom edge models), and GPS tracking devices</li>
+              <li><strong>Backend &amp; Data</strong> — Design APIs, data models, and infrastructure to handle real-time plate reads, image storage, violation history, and multi-tenant property management</li>
+            </ul>
+
+            <h5>Tech Stack</h5>
+            <ul>
+              <li><strong>Frontend:</strong> React or Next.js, TypeScript, Tailwind CSS / Bootstrap</li>
+              <li><strong>Mobile:</strong> React Native or Flutter (iOS + Android)</li>
+              <li><strong>Backend:</strong> Python (FastAPI / Django) or Node.js</li>
+              <li><strong>Database:</strong> PostgreSQL, Redis for caching and real-time events</li>
+              <li><strong>ALPR / Vision:</strong> OpenALPR, Rekor Scout, or custom OCR models (OpenCV, Tesseract, YOLO-based plate detection)</li>
+              <li><strong>Cloud:</strong> AWS (S3, Lambda, EC2) or GCP — image storage, serverless processing, CDN</li>
+              <li><strong>Mapping:</strong> Leaflet.js / Mapbox for GPS route visualization and geofencing</li>
+              <li><strong>Real-Time:</strong> WebSockets or MQTT for live patrol tracking and instant plate match alerts</li>
             </ul>
 
             <h5>What We're Looking For</h5>
             <ul>
               <li>3+ years of professional software development experience</li>
-              <li>Strong with modern web technologies (JavaScript/TypeScript, Python, or similar)</li>
-              <li>Comfortable working across the stack — frontend, backend, and database</li>
-              <li>Self-starter who can take a rough idea and turn it into working software</li>
-              <li>Bonus: experience with mapping/GIS, mobile development, or hardware integrations</li>
+              <li>Strong full-stack skills — you're comfortable shipping a React frontend, a Python/Node API, and the database layer beneath it</li>
+              <li>Experience building or integrating with mobile apps (React Native or Flutter preferred)</li>
+              <li>Familiarity with computer vision, OCR, or image processing pipelines (ALPR experience is a major plus but not required — willingness to learn is)</li>
+              <li>Comfortable with cloud infrastructure (AWS or GCP) — deploying services, managing storage, setting up CI/CD</li>
+              <li>Experience with real-time systems: WebSockets, MQTT, push notifications, or event-driven architectures</li>
+              <li>Self-starter who can take a rough idea and turn it into working software without hand-holding</li>
+              <li>Bonus: experience with mapping/GIS, geofencing, edge computing, or hardware integrations</li>
             </ul>
 
             <h5>Why This Role</h5>
             <ul>
-              <li>Early-stage opportunity with significant ownership and impact</li>
-              <li>Build real software that people use every night in the field</li>
-              <li>Small team, no bureaucracy, fast iteration</li>
+              <li>Early-stage opportunity with significant ownership — you'll architect systems from scratch, not maintain someone else's code</li>
+              <li>Build real software that patrol officers use every night in the field and property managers rely on every morning</li>
+              <li>Work on a genuinely interesting technical problem: real-time ALPR + mobile + cloud in a domain most engineers haven't touched</li>
+              <li>Small team, no bureaucracy, fast iteration — your code ships this week, not next quarter</li>
             </ul>
           </div>
 
